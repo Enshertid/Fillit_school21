@@ -1,7 +1,19 @@
-#ifndef INPUT_H
-#define INPUT_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dbendu <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/25 20:37:59 by dbendu            #+#    #+#             */
+/*   Updated: 2019/06/25 20:38:00 by dbendu           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "libft.h"
+#ifndef INPUT_H
+# define INPUT_H
+
+# include "libft.h"
 
 t_list *processing_input(const int fd);
 
