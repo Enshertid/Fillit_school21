@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dbendu <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/25 20:44:36 by dbendu            #+#    #+#             */
+/*   Updated: 2019/06/25 20:44:39 by dbendu           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unistd.h"
 #include "stdio.h"
 #include "fcntl.h"
@@ -5,7 +17,7 @@
 #include "fillit.h"
 #include "input.h"
 
-void print(Shape *shape)
+void	print(t_shape *shape)
 {
 	size_t i;
 	size_t j;
@@ -30,11 +42,11 @@ void print(Shape *shape)
 	}
 }
 
-int main(void)
+int		main(void)
 {
 	int		fd;
 	t_list	*shapes;
-	t_list *temp;
+	t_list	*temp;
 
 	if ((fd = open("/Users/dbendu/Downloads/fillit/file.txt", O_RDONLY)) < 1)
 		error();
@@ -43,11 +55,10 @@ int main(void)
 	temp = shapes;
 	while (shapes)
 	{
-		print((Shape*)shapes->content);
+		print((t_shape*)shapes->content);
 		write(1, "\n", 1);
 		shapes = shapes->next;
 	}
 	ft_lstclear(&temp);
-
 	return (0);
 }

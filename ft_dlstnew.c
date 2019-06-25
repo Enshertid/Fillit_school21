@@ -11,22 +11,23 @@
 /* ************************************************************************** */
 
 #include "list.h"
+#include "libft.h"
 
-t_dlist		*ft_create_el(const void* data, size_t size)
+t_dlist		*ft_dlstnew(const void *data, size_t size)
 {
-	t_dlist		*new;
+	t_dlist *new;
 
-	if (data && size)
+	if (!data || !size)
+		return (NULL);
+	if (!(new = malloc(sizeof(t_dlist))))
+		return (NULL);
+	if (!(new->data = malloc(size)))
 	{
-		if (!(new = malloc(sizeof(t_dlist))))
-			return(NULL);
-		if (!(new->data = malloc(size)))
-		{
-			free(new);
-			return(NULL);
-		}
-		ft_memcpy(new->data, data, size);
-		return(new);
+		free(new);
+		return (NULL);
 	}
-	return(NULL);
+	ft_memcpy(new->data, data, size);
+	new->next = NULL;
+	new->prev = NULL;
+	return (new);
 }

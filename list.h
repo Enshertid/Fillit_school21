@@ -10,12 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#ifndef LIST_H
+# define LIST_H
 
-typedef		struct		s_dlist
+# include <stdlib.h>
+
+typedef struct		s_dlist
 {
-	void*		data;
-	struct	s_dlist		*next;
-	struct	s_dlist		*prev;
-}			t_dlist;
+	void			*data;
+	struct s_dlist	*next;
+	struct s_dlist	*prev;
+}					t_dlist;
 
+t_dlist				*ft_dlstnew(const void *data, size_t size);
+
+#endif

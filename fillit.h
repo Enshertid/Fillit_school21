@@ -1,21 +1,29 @@
-#ifndef FILLIT_H
-#define FILLIT_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fillit.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dbendu <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/25 20:38:32 by dbendu            #+#    #+#             */
+/*   Updated: 2019/06/25 20:38:33 by dbendu           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-typedef struct  s_point
+#ifndef FILLIT_H
+# define FILLIT_H
+
+typedef struct	s_point
 {
 	unsigned	x;
 	unsigned	y;
 }				t_point;
 
-typedef t_point Point;
-
-typedef struct  s_shape
+typedef struct	s_shape
 {
-	Point		points[4];
+	t_point		points[4];
 }				t_shape;
 
-typedef t_shape Shape;
-
-void	error(void);
+void			error(void);
 
 #endif

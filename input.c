@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dbendu <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/25 20:36:36 by dbendu            #+#    #+#             */
+/*   Updated: 2019/06/25 20:36:39 by dbendu           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 #include "input.h"
 
-static void shift_shape_in_corner(Shape *shape)
+static void	shift_shape_in_corner(t_shape *shape)
 {
 	size_t iter;
 	size_t x_shift;
@@ -19,10 +31,10 @@ static void shift_shape_in_corner(Shape *shape)
 	}
 }
 
-static void get_shape(Shape *shape, const char *buf)
+static void	get_shape(t_shape *shape, const char *buf)
 {
 	size_t	iter;
-	size_t  pos;
+	size_t	pos;
 
 	iter = 0;
 	pos = 0;
@@ -39,7 +51,7 @@ static void get_shape(Shape *shape, const char *buf)
 	shift_shape_in_corner(shape);
 }
 
-static void check_symbols(const char *buf, int size)
+static void	check_symbols(const char *buf, int size)
 {
 	int iter;
 	int sharps;
@@ -63,7 +75,7 @@ static void check_symbols(const char *buf, int size)
 		error();
 }
 
-static void check_shapes(const char *buf)
+static void	check_shapes(const char *buf)
 {
 	size_t i;
 
@@ -81,13 +93,13 @@ static void check_shapes(const char *buf)
 	}
 }
 
-t_list *processing_input(const int fd)
+t_list		*processing_input(const int fd)
 {
 	char	buf[21];
 	t_list	*shapes;
 	size_t	prev_read;
 	size_t	cur_read;
-	Shape	shape;
+	t_shape	shape;
 
 	prev_read = 0;
 	shapes = NULL;
@@ -96,7 +108,7 @@ t_list *processing_input(const int fd)
 		check_symbols(buf, cur_read);
 		check_shapes(buf);
 		get_shape(&shape, buf);
-		ft_lstappend(&shapes, ft_lstnew(&shape, sizeof(Shape)));
+		ft_lstappend(&shapes, ft_lstnew(&shape, sizeof(t_shape)));
 		prev_read = cur_read;
 	}
 	if (prev_read == 21)
