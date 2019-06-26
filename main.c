@@ -48,7 +48,7 @@ int		main(void)
 	t_list	*shapes;
 	t_list	*temp;
 
-	if ((fd = open("/Users/dbendu/Downloads/fillit/file.txt", O_RDONLY)) < 1)
+	if ((fd = open("file.txt", O_RDONLY)) < 1)
 		error();
 	shapes = processing_input(fd);
 	close(fd);
