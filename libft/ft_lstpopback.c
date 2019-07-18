@@ -24,7 +24,7 @@ void		ft_lstpopback(t_list **list)
 
 	if (!list || !*list)
 		return ;
-	if (ft_lstsize(*list) == 1)
+	if (*list == (*list)->end)
 	{
 		delelem(*list);
 		*list = NULL;
@@ -32,9 +32,10 @@ void		ft_lstpopback(t_list **list)
 	else
 	{
 		iter = *list;
-		while (iter->next->next)
+		while (iter->next != (*list)->end)
 			iter = iter->next;
 		delelem(iter->next);
 		iter->next = NULL;
+		(*list)->end = iter;
 	}
 }

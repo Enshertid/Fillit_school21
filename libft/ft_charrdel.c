@@ -12,18 +12,19 @@
 
 #include "libft.h"
 
-void	ft_charrdel(char **arr)
+void	ft_charrdel(char ***arr)
 {
 	size_t iter;
 
 	if (!arr || !*arr)
 		return ;
 	iter = 0;
-	while (arr[iter])
+	while ((*arr)[iter])
 	{
-		free(arr[iter]);
+		free((*arr)[iter]);
+		(*arr)[iter] = NULL;
 		++iter;
 	}
-	free(arr);
+	free(*arr);
 	*arr = NULL;
 }

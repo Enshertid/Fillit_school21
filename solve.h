@@ -1,31 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   solve.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbendu <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/25 20:38:32 by dbendu            #+#    #+#             */
-/*   Updated: 2019/06/25 20:38:33 by dbendu           ###   ########.fr       */
+/*   Created: 2019/07/14 15:11:22 by dbendu            #+#    #+#             */
+/*   Updated: 2019/07/14 15:11:23 by dbendu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
+#include "shape.h"
 
-# include "libft.h"
-
-typedef struct	s_point
-{
-	unsigned	x;
-	unsigned	y;
-}				t_point;
-
-typedef struct	s_shape
-{
-	t_point		points[4];
-}				t_shape;
-
-void			error(void);
-
-#endif
+char		**solve(t_shape *shapes);
+extern void	error(void);

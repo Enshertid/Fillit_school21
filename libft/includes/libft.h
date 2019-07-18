@@ -27,6 +27,7 @@ typedef	struct		s_list
 	void			*content;
 	size_t			content_size;
 	struct s_list	*next;
+	struct s_list	*end;
 }					t_list;
 
 typedef struct		s_dlist
@@ -40,11 +41,12 @@ typedef struct		s_dlist
 void				ft_lstpop(t_list **list);
 void				ft_lstclear(t_list **list);
 void				ft_lstremove(t_list **list);
+void				ft_lstpopback(t_list **list);
 size_t				ft_lstsize(const t_list *list);
 void				ft_lstdelete(t_list **list, t_list **del);
-int					ft_lstextend(t_list **list, t_list **add);
-int					ft_lstappend(t_list **list, t_list *elem);
-int					ft_lstadd(t_list **list, t_list *new_elem);
+void				ft_lstextend(t_list **list, t_list **add);
+void				ft_lstappend(t_list **list, t_list *elem);
+void				ft_lstadd(t_list **list, t_list *new_elem);
 void				ft_lstiter(t_list *list, void(*f)(t_list *elem));
 void				ft_lstdel(t_list **alst, void (*del)(void*, size_t));
 t_list				*ft_lstnew(void const *content, size_t content_size);
@@ -120,6 +122,6 @@ int					ft_max(int a, int b);
 void				ft_reverse_str(char *str);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
-void				ft_charrdel(char **arr);
+void				ft_charrdel(char ***arr);
 
 #endif

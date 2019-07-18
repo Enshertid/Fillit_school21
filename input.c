@@ -10,8 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "unistd.h"
+
+#include "libft.h"
+
 #include "input.h"
+#include "shape.h"
 
 static void	shift_shape_in_corner(t_shape *shape)
 {
@@ -19,10 +23,10 @@ static void	shift_shape_in_corner(t_shape *shape)
 	size_t x_shift;
 	size_t y_shift;
 
-	x_shift = ft_min(ft_min(shape->points[0].x, shape->points[1].x),
-				ft_min(shape->points[2].x, shape->points[3].x));
-	y_shift = ft_min(ft_min(shape->points[0].y, shape->points[1].y),
-				ft_min(shape->points[2].y, shape->points[3].y));
+	x_shift = shape->points[0].x;
+	y_shift = ft_min(ft_min(shape->points[0].y,
+							shape->points[1].y),
+							shape->points[2].y);
 	iter = 0 - 1;
 	while (++iter < 4)
 	{
@@ -36,70 +40,68 @@ static void	get_shape(t_shape *shape, const char *buf)
 	size_t	iter;
 	size_t	pos;
 
-	iter = 0;
+	iter = 0 - 1;
 	pos = 0;
-	while (iter < 20)
-	{
+	while (++iter < 20)
 		if (buf[iter] == '#')
 		{
 			shape->points[pos].x = iter / 5;
 			shape->points[pos].y = iter % 5;
 			++pos;
 		}
-		++iter;
-	}
 	shift_shape_in_corner(shape);
 }
 
-static void	check_symbols(const char *buf, int size)
+static void	check_symbols(const char *buf, unsigned bufsize)
 {
 	int iter;
 	int sharps;
 
-	iter = 0;
+	iter = 0 - 1;
 	sharps = 0;
-	while (iter < 20)
+	while (++iter < 20)
 	{
 		if ((iter + 1) % 5)
 		{
 			if (buf[iter] != '.' && buf[iter] != '#')
 				error();
-			if (buf[iter] == '#' && ++sharps > 4)
-				error();
+			if (buf[iter] == '#')
+				++sharps;
 		}
 		else if (buf[iter] != '\n')
 			error();
-		++iter;
 	}
-	if (sharps != 4 || (size == 21 && buf[20] != '\n'))
+	if (sharps != 4 || (bufsize == 21 && buf[20] != '\n'))
 		error();
 }
 
 static void	check_shapes(const char *buf)
 {
-	size_t i;
+	unsigned i;
+	unsigned contacts;
 
-	i = 0;
-	while (i < 14)
+	i = 0 - 1;
+	contacts = 0;
+	while (++i < 19)
 	{
-		if (buf[i] == '#')
-		{
-			if (buf[i + 4] == '#' && buf[i - 1] != '#' && buf[i + 5] != '#')
-				error();
-			if (buf[i + 6] == '#' && buf[i + 1] != '#' && buf[i + 5] != '#')
-				error();
-		}
-		++i;
+		if (buf[i] != '#')
+			continue;
+		contacts += buf[i + 1] == '#';
+		contacts += i > 4 && buf[i - 5] == '#';
+		contacts += i % 5 && buf[i - 1] == '#';
+		contacts += i < 14 && buf[i + 5] == '#';
 	}
+	if (contacts < 6)
+		error();
 }
 
-t_list		*processing_input(const int fd)
+t_shape		*get_shapes(const int fd)
 {
-	char	buf[21];
-	t_list	*shapes;
-	size_t	prev_read;
-	size_t	cur_read;
-	t_shape	shape;
+	char		buf[21];
+	t_shape		*shapes;
+	t_shape		shape;
+	unsigned	prev_read;
+	unsigned	cur_read;
 
 	prev_read = 0;
 	shapes = NULL;
@@ -108,7 +110,7 @@ t_list		*processing_input(const int fd)
 		check_symbols(buf, cur_read);
 		check_shapes(buf);
 		get_shape(&shape, buf);
-		ft_lstappend(&shapes, ft_lstnew(&shape, sizeof(t_shape)));
+		ft_shapeappend(&shapes, ft_shapenew(&shape));
 		prev_read = cur_read;
 	}
 	if (prev_read == 21)

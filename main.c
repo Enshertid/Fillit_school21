@@ -5,60 +5,48 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbendu <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/25 20:44:36 by dbendu            #+#    #+#             */
-/*   Updated: 2019/06/25 20:44:39 by dbendu           ###   ########.fr       */
+/*   Created: 2019/07/14 14:56:20 by dbendu            #+#    #+#             */
+/*   Updated: 2019/07/14 14:56:21 by dbendu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "stdlib.h"
+#include "fcntl.h"
 #include "unistd.h"
 #include "stdio.h"
-#include "fcntl.h"
 
-#include "fillit.h"
+#include "libft.h"
+
+#include "shape.h"
 #include "input.h"
+#include "solve.h"
 
-void	print(t_shape *shape)
+void	error(void)
 {
-	size_t i;
-	size_t j;
-
-	i = 0;
-	while (i < 4)
-	{
-		j = 0;
-		while (j < 4)
-		{
-			if ((shape->points[0].x == i && shape->points[0].y == j) ||
-				(shape->points[1].x == i && shape->points[1].y == j) ||
-				(shape->points[2].x == i && shape->points[2].y == j) ||
-				(shape->points[3].x == i && shape->points[3].y == j))
-				write(1, "#", 1);
-			else
-				write(1, ".", 1);
-			++j;
-		}
-		write(1, "\n", 1);
-		++i;
-	}
+	write(1, "error\n", 6);
+	exit(0);
 }
 
-int		main(void)
+ int	main(int argc, const char * const *argv)
 {
 	int		fd;
-	t_list	*shapes;
-	t_list	*temp;
+	t_shape *shapes;
+	char	**map;
 
-	if ((fd = open("file.txt", O_RDONLY)) < 1)
-		error();
-	shapes = processing_input(fd);
-	close(fd);
-	temp = shapes;
-	while (shapes)
+	if (argc != 2)
 	{
-		print((t_shape*)shapes->content);
-		write(1, "\n", 1);
-		shapes = shapes->next;
+		write(1, "Only one file should be in arguments.\n", 39);
+		write(1, "Example: fillit /*path*/filename\n", 34);
+		return (0);
 	}
-	ft_lstclear(&temp);
+	if ((fd = open(argv[1], O_RDONLY)) == -1)
+		error();
+	shapes = get_shapes(fd);
+	map = solve(shapes);
+	for (size_t i = 0; map[i]; ++i)
+		ft_putstr(map[i]);
+	free(map[0]);
+	free(map);
+	ft_shapeclear(&shapes);
 	return (0);
 }

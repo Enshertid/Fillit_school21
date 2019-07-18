@@ -56,7 +56,7 @@ char				**ft_strsplit(const char *str, char c)
 	{
 		if (!(arr[iter] = (char*)malloc(word_len + 1)))
 		{
-			ft_charrdel(arr);
+			ft_charrdel(&arr);
 			return (NULL);
 		}
 		ft_strncpy(arr[iter], str, word_len);

@@ -13,6 +13,9 @@
 #ifndef INPUT_H
 # define INPUT_H
 
-t_list *processing_input(const int fd);
+# include "shape.h"
+
+t_shape		*get_shapes(const int fd);
+extern void	error(void);
 
 #endif

@@ -12,22 +12,19 @@
 
 #include "libft.h"
 
-int	ft_lstextend(t_list **list, t_list **add)
+void	ft_lstextend(t_list **list, t_list **add)
 {
-	t_list *iter;
-
-	if (!list || !add || (!*list && !*add))
-		return (0);
-	if (!*list && *add)
+	if (!list || !add)
+		return;
+	if (*list)
 	{
-		*list = *add;
-		return (1);
+		if (*add)
+		{
+			(*list)->end->next = *add;
+			(*list)->end = (*add)->end;
+		}
 	}
-	if (*list && !add)
-		return (1);
-	iter = *list;
-	while (iter->next)
-		iter = iter->next;
-	iter->next = *add;
-	return (1);
+	else
+		if (*add)
+			*list = *add;
 }

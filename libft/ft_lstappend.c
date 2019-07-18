@@ -12,22 +12,18 @@
 
 #include "libft.h"
 
-int	ft_lstappend(t_list **list, t_list *elem)
+void	ft_lstappend(t_list **list, t_list *new)
 {
-	register t_list *iter;
-
-	if (list && elem)
+	if (!list || !new)
+		return ;
+	if (!*list)
 	{
-		iter = *list;
-		if (iter)
-		{
-			while (iter->next)
-				iter = iter->next;
-			iter->next = elem;
-		}
-		else
-			*list = elem;
-		return (1);
+		*list = new;
+		new->end = new;
 	}
-	return (0);
+	else
+	{
+		(*list)->end->next = new;
+		(*list)->end = new;
+	}
 }

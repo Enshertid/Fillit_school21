@@ -12,25 +12,31 @@
 
 #include "libft.h"
 
-void	ft_lstdelete(t_list **list, t_list **del)
+static void	ft_replace(t_list **to, t_list **from)
+{
+	free((*to)->content);
+	(*to)->content = (*from)->content;
+	(*to)->content_size = (*from)->content_size;
+	(*to)->next = (*from)->next;
+	free(*from);
+}
+
+void		ft_lstdelete(t_list **list, t_list **del)
 {
 	t_list *iter;
-	t_list *temp;
 
-	if (!list || !*list || !del || !*del || (temp = NULL))
+	if (!list || !*list || !del || !*del)
 		return ;
-	iter = *list;
-	while (iter && iter != *del)
-	{
-		temp = iter;
-		iter = iter->next;
-	}
-	if (!iter)
-		return ;
-	if (!temp)
-		*list = iter->next;
+	if (*del == (*list))
+		ft_lstpop(list);
+	else if (*del == (*list)->end)
+		ft_lstpopback(list);
 	else
-		temp->next = iter->next;
-	ft_lstremove(&iter);
-	*del = NULL;
+	{
+		iter = *list;
+		while (iter && iter != *del)
+			iter = iter->next;
+		if (iter)
+			ft_replace(&iter, &(iter->next));
+	}
 }

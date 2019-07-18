@@ -18,6 +18,8 @@ void	ft_lstpop(t_list **list)
 
 	if (!list || !*list)
 		return ;
+	if ((*list)->next)
+		(*list)->next->end = (*list)->end;
 	temp = (*list)->next;
 	free((*list)->content);
 	free(*list);
