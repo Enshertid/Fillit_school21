@@ -6,11 +6,10 @@
 /*   By: ymanilow <ymanilow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 17:03:12 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/07/19 16:07:32 by ymanilow         ###   ########.fr       */
+/*   Updated: 2019/07/19 16:23:34 by ymanilow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sys/types.h"
 #include "fillit.h"
 
 void			error(void)
@@ -19,7 +18,7 @@ void			error(void)
 	exit(0);
 }
 
-int 		ft_fillit(char	***map, t_shape *shapes, size_t map_size)
+int				ft_fillit(char ***map, t_shape *shapes, size_t map_size)
 {
 	size_t x;
 	size_t y;
@@ -43,17 +42,17 @@ int 		ft_fillit(char	***map, t_shape *shapes, size_t map_size)
 static size_t	ft_evaluate_map_size(unsigned points)
 {
 	size_t map_size;
-	
+
 	map_size = 1;
 	while (map_size * map_size < points)
 		++map_size;
 	return (map_size);
 }
 
-char **ft_do_fillit(t_shape *shapes)
+char			**ft_do_fillit(t_shape *shapes)
 {
 	size_t		map_size;
-	char **map;
+	char		**map;
 
 	map_size = ft_evaluate_map_size(ft_shape_size(shapes) * 4);
 	map = ft_map_create(map_size);

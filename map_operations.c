@@ -6,11 +6,9 @@
 /*   By: ymanilow <ymanilow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 15:00:05 by dbendu            #+#    #+#             */
-/*   Updated: 2019/07/19 15:58:48 by ymanilow         ###   ########.fr       */
+/*   Updated: 2019/07/19 16:20:02 by ymanilow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "stdlib.h"
 
 #include "fillit.h"
 
@@ -38,13 +36,13 @@ char		**ft_map_create(size_t map_size)
 	return (map);
 }
 
-void		ft_map_delete(char	**map)
+void		ft_map_delete(char **map)
 {
 	free(map[0]);
 	free(map);
 }
 
-int		ft_check_figure(char **map, t_shape *shapes ,
+int			ft_check_figure(char **map, t_shape *shapes,
 						unsigned pos, size_t map_size)
 {
 	unsigned x;
@@ -57,7 +55,7 @@ int		ft_check_figure(char **map, t_shape *shapes ,
 				shapes->points[2].x + x >= map_size ||
 					shapes->points[3].x + x >= map_size)
 		return (0);
-	return (map[shapes->points[0].x + x][shapes->points[0].y + y] == '.' && 
+	return (map[shapes->points[0].x + x][shapes->points[0].y + y] == '.' &&
 			map[shapes->points[1].x + x][shapes->points[1].y + y] == '.' &&
 			map[shapes->points[2].x + x][shapes->points[2].y + y] == '.' &&
 			map[shapes->points[3].x + x][shapes->points[3].y + y] == '.');
@@ -76,7 +74,7 @@ char		**ft_place_figure(char **map, t_shape *shapes,
 	return (map);
 }
 
-char		**ft_clean_map(char  **map, t_shape *shapes, size_t x, size_t y)
+char		**ft_clean_map(char **map, t_shape *shapes, unsigned x, unsigned y)
 {
 	map[shapes->points[0].x + x][shapes->points[0].y + y] = '.';
 	map[shapes->points[1].x + x][shapes->points[1].y + y] = '.';

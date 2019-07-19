@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbendu <dbendu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ymanilow <ymanilow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 17:03:35 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/07/19 15:46:27 by dbendu           ###   ########.fr       */
+/*   Updated: 2019/07/19 16:17:55 by ymanilow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,7 @@ void		ft_check_symbols(char *s, size_t rd)
 		if (!((i + 1) % 5) && s[i] != '\n')
 			error();
 		else if (s[i] != '#' && s[i] != '.' && s[i] != '\n')
-		{
-			printf("symbol: %i\n", s[i]);
 			error();
-		}
 		else if (s[i] == '#')
 		{
 			k += ((i > 4) && (s[i - 5] == '#'));
@@ -87,6 +84,7 @@ void		ft_input(int fd, t_shape **shapes)
 	t_shape	shape;
 	char	s[21];
 
+	*shapes = NULL;
 	while ((rd = read(fd, s, 21)))
 	{
 		if (rd != 20 && rd != 21)
@@ -97,9 +95,6 @@ void		ft_input(int fd, t_shape **shapes)
 		ft_shape_append(shapes, ft_shape_new(&shape));
 		check = rd;
 	}
-	if (check == 21)
+	if (check == 21 || !*shapes)
 		error();
-	// else if (check != 0)
-	// 	return(1);
-	// return (0);
 }

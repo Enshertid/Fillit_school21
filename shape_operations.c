@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shape_operations.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbendu <dbendu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ymanilow <ymanilow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 14:55:36 by dbendu            #+#    #+#             */
-/*   Updated: 2019/07/19 15:41:39 by dbendu           ###   ########.fr       */
+/*   Updated: 2019/07/19 16:19:02 by ymanilow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_shape		*ft_shape_new(const t_shape *shape)
 	return (new);
 }
 
-void	ft_shapes_clear(t_shape **list)
+void		ft_shapes_clear(t_shape **list)
 {
 	register t_shape *iter;
 	register t_shape *temp;
@@ -42,7 +42,7 @@ void	ft_shapes_clear(t_shape **list)
 	*list = NULL;
 }
 
-void	ft_shape_append(t_shape **list, t_shape *new)
+void		ft_shape_append(t_shape **list, t_shape *new)
 {
 	if (!list || !new)
 		return ;
@@ -60,7 +60,7 @@ void	ft_shape_append(t_shape **list, t_shape *new)
 	}
 }
 
-size_t	ft_shape_size(const t_shape *list)
+size_t		ft_shape_size(const t_shape *list)
 {
 	size_t size;
 
