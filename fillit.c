@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbendu <dbendu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ymanilow <ymanilow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 17:03:12 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/07/19 15:41:54 by dbendu           ###   ########.fr       */
+/*   Updated: 2019/07/19 16:07:32 by ymanilow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,17 @@ static size_t	ft_evaluate_map_size(unsigned points)
 	return (map_size);
 }
 
-void			ft_do_fillit(char ***map, t_shape *shapes)
+char **ft_do_fillit(t_shape *shapes)
 {
 	size_t		map_size;
+	char **map;
 
 	map_size = ft_evaluate_map_size(ft_shape_size(shapes) * 4);
-	ft_map_create(map_size);
-	while (!(ft_fillit(map, shapes, map_size)))
+	map = ft_map_create(map_size);
+	while (!(ft_fillit(&map, shapes, map_size)))
 	{
-		ft_map_delete(*map);
-		*map = ft_map_create(++map_size);
+		ft_map_delete(map);
+		map = ft_map_create(++map_size);
 	}
+	return (map);
 }
-
-
-
-
-
-
-
-
-
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbendu <dbendu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ymanilow <ymanilow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 16:28:29 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/07/19 15:41:49 by dbendu           ###   ########.fr       */
+/*   Updated: 2019/07/19 16:07:44 by ymanilow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct		s_shape
 	int				letter;
 }					t_shape;
 
-void				ft_do_fillit(char ***map, t_shape *shapes);
+char **				ft_do_fillit(t_shape *shapes);
 void				ft_input(int fd, t_shape **shapes);
 void				error(void);
 void	ft_shapes_clear(t_shape **list);

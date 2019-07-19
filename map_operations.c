@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_operations.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbendu <dbendu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ymanilow <ymanilow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 15:00:05 by dbendu            #+#    #+#             */
-/*   Updated: 2019/07/19 15:22:40 by dbendu           ###   ########.fr       */
+/*   Updated: 2019/07/19 15:58:48 by ymanilow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,23 @@
 
 char		**ft_map_create(size_t map_size)
 {
-	unsigned	i;
-	unsigned	j;
+	unsigned	x;
+	unsigned	y;
 	char		**map;
 
 	map = (char**)malloc(sizeof(char*) * (map_size + 1));
 	map[0] = (char*)malloc(map_size * (map_size + 2));
-	i = 0;
-	while (++i < map_size)
-		map[i] = map[i - 1] + map_size + 2;
-	i = 0 - 1;
-	while (++i < map_size)
+	x = 0;
+	while (++x < map_size)
+		map[x] = map[x - 1] + map_size + 2;
+	x = 0 - 1;
+	while (++x < map_size)
 	{
-		j = 0 - 1;
-		while (++j < map_size)
-			map[i][j] = '.';
-		map[i][j] = '\n';
-		map[i][j + 1] = '\0';
+		y = 0 - 1;
+		while (++y < map_size)
+			map[x][y] = '.';
+		map[x][y] = '\n';
+		map[x][y + 1] = '\0';
 	}
 	map[map_size] = NULL;
 	return (map);
