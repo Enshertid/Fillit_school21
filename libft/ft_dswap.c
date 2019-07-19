@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_islower.c                                       :+:      :+:    :+:   */
+/*   ft_dswap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymanilow <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dbendu <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/19 16:50:06 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/04/19 16:56:01 by ymanilow         ###   ########.fr       */
+/*   Created: 2019/04/08 20:12:56 by dbendu            #+#    #+#             */
+/*   Updated: 2019/04/08 20:12:57 by dbendu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_islower(int c)
+void	ft_dswap(double *a, double *b)
 {
-	if (c >= 'a' && c <= 'z')
-		return (1);
-	else
-		return (0);
+	double temp;
+
+	if (a && b)
+	{
+		temp = *a;
+		*a = *b;
+		*b = temp;
+	}
 }

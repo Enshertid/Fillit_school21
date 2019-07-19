@@ -3,33 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymanilow <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dbendu <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/11 15:48:46 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/04/18 14:46:00 by ymanilow         ###   ########.fr       */
+/*   Created: 2019/04/08 20:16:43 by dbendu            #+#    #+#             */
+/*   Updated: 2019/04/08 20:16:45 by dbendu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memccpy(void *dst, const void *src,
-		int c, size_t n)
+void	*ft_memccpy(void *deststr, const void *srcstr, int ch, size_t count)
 {
-	unsigned char			b;
-	unsigned char			*str;
-	unsigned char			*str2;
-	size_t					i;
+	register unsigned char *dest;
+	register unsigned char *src;
+	register unsigned char stop;
 
-	b = (unsigned char)c;
-	i = 0;
-	str = (unsigned char *)dst;
-	str2 = (unsigned char *)src;
-	while (i < n)
-	{
-		str[i] = str2[i];
-		if (b == str[i])
-			return (dst + i + 1);
-		i++;
-	}
+	dest = (unsigned char*)deststr;
+	src = (unsigned char*)srcstr;
+	stop = ch;
+	while (count--)
+		if ((*dest++ = *src++) == stop)
+			return (dest);
 	return (NULL);
 }

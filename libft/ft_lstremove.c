@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrev.c                                        :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymanilow <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dbendu <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/19 16:37:41 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/04/19 19:35:00 by ymanilow         ###   ########.fr       */
+/*   Created: 2019/04/08 20:15:40 by dbendu            #+#    #+#             */
+/*   Updated: 2019/04/08 20:15:41 by dbendu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrev(char *str)
+void	ft_lstremove(t_list **list)
 {
-	int		i;
-	int		j;
-	char	c;
-
-	i = 0;
-	j = 0;
-	while (str[i])
-		i++;
-	while (j <= i / 2)
-	{
-		c = str[j];
-		str[j] = str[i];
-		str[i] = c;
-		j++;
-	}
-	return (str);
+	if (!list || !*list)
+		return ;
+	free((*list)->content);
+	free(*list);
+	*list = NULL;
 }

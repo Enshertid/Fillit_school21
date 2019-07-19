@@ -3,38 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymanilow <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dbendu <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/14 14:46:52 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/04/18 16:01:12 by ymanilow         ###   ########.fr       */
+/*   Created: 2019/04/08 20:24:48 by dbendu            #+#    #+#             */
+/*   Updated: 2019/04/08 20:24:49 by dbendu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+char	*ft_strmapi(const char *str, char (*f)(unsigned int, char))
 {
-	unsigned int	i;
-	char			*str;
+	register char	*new_str;
+	size_t			iter;
 
-	i = 0;
-	if (s)
-	{
-		while (s[i])
-			i++;
-		str = (char *)malloc(sizeof(*str) * (i + 1));
-		if (str == NULL)
-			return (NULL);
-	}
-	i = 0;
-	if (f)
-	{
-		while (s[i])
-		{
-			str[i] = (*f)(i, s[i]);
-			i++;
-		}
-		str[i] = '\0';
-	}
-	return (str);
+	if (!str || !f)
+		return (NULL);
+	new_str = (char*)malloc(ft_strlen(str) + 1);
+	if (!new_str)
+		return (NULL);
+	iter = -1;
+	while (str[++iter])
+		new_str[iter] = f(iter, str[iter]);
+	new_str[iter] = '\0';
+	return (new_str);
 }

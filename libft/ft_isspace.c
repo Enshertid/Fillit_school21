@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymanilow <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dbendu <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/13 21:04:28 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/04/19 15:12:06 by ymanilow         ###   ########.fr       */
+/*   Created: 2019/04/08 20:14:16 by dbendu            #+#    #+#             */
+/*   Updated: 2019/04/08 20:14:17 by dbendu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isspace(int c)
+int	ft_isspace(int c)
 {
-	if (c == '\t' || c == '\n' || c == '\v' || c == '\r'
-		|| c == ' ' || c == '\f')
-		return (1);
-	else
-		return (0);
+	return (c == ' '
+		|| c == '\f'
+		|| c == '\n'
+		|| c == '\r'
+		|| c == '\t'
+		|| c == '\v');
 }

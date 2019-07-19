@@ -3,32 +3,40 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ymanilow <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: dbendu <dbendu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/14 19:26:20 by ymanilow          #+#    #+#              #
-#    Updated: 2019/07/18 16:34:00 by ymanilow         ###   ########.fr        #
+#    Updated: 2019/07/19 15:42:57 by dbendu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fillit
 
-SRCS_C = ./fillit.c \
-		./ft_list_add_to_end.c\
-		./ft_list_new.c \
-		 ./input.c\
-		 ./operation_with_map.c\
-
-SRCS_H = ./libft/libft.a\
+SRCS_C =	fillit.c			\
+			input.c				\
+			shape_operations.c	\
+			map_operations.c	\
+			main.c
 
 all: $(NAME)
 
 $(NAME):
-	gcc -Wall -Wextra -Werror -o fillit $(SRCS_C)  $(SRCS_H)
+	@clear
+	@gcc -Wall -Wextra -Werror $(SRCS_C) -Ilibft/includes libft.a -o fillit
 
 clean: 
-	rm -Rf fillit
+	rm -Rf *.o
 
 fclean: clean
-	rm -Rf *.h.*
+	rm fillit
 
 re: fclean all
+
+d:
+	@clear
+	@gcc -g -Wall -Werror -Wextra -Ilibft/includes main.c  input.c shape_operations.c fillit.c map_operations.c libft.a -o fillit
+
+c:
+	@clear
+	@gcc -g -Wall -Werror -Wextra -Ilibft/includes main.c  input.c shape_operations.c fillit.c map_operations.c libft.a -o fillit
+	@./fillit file.txt

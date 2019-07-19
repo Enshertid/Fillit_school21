@@ -3,38 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymanilow <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dbendu <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/14 14:26:15 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/04/18 16:01:07 by ymanilow         ###   ########.fr       */
+/*   Created: 2019/04/08 20:24:42 by dbendu            #+#    #+#             */
+/*   Updated: 2019/04/08 20:24:44 by dbendu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmap(char const *s, char (*f)(char))
+char	*ft_strmap(const char *str, char (*f)(char))
 {
-	char	*str;
-	int		i;
+	register char	*new_str;
+	size_t			iter;
 
-	i = 0;
-	if (s)
-	{
-		while (s[i])
-			i++;
-		str = (char *)malloc(sizeof(*str) * i + 1);
-		if (str == NULL)
-			return (NULL);
-	}
-	i = 0;
-	if (f)
-	{
-		while (s[i])
-		{
-			str[i] = (*f)(s[i]);
-			i++;
-		}
-		str[i] = '\0';
-	}
-	return (str);
+	if (!str || !f)
+		return (NULL);
+	new_str = (char*)malloc(ft_strlen(str) + 1);
+	if (!new_str)
+		return (NULL);
+	iter = -1;
+	while (str[++iter])
+		new_str[iter] = f(str[iter]);
+	new_str[iter] = '\0';
+	return (new_str);
 }

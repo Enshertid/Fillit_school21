@@ -3,51 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymanilow <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dbendu <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/18 18:58:32 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/04/27 13:15:11 by ymanilow         ###   ########.fr       */
+/*   Created: 2019/04/08 20:15:59 by dbendu            #+#    #+#             */
+/*   Updated: 2019/04/08 20:50:32 by dbendu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void		ft_free(t_list *lst, t_list *name)
+t_list	*ft_lstmap(t_list *list, t_list *(*f)(t_list *elem))
 {
-	t_list	*p;
+	t_list			*new_list;
+	register t_list	*iter;
 
-	while (name != lst)
-	{
-		p = name;
-		free(name);
-		name = p->next;
-	}
-	free(lst);
-}
-
-t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
-{
-	t_list *name;
-	t_list *name2;
-
-	if (!(name = (t_list*)malloc(sizeof(*lst))))
+	if (!list || !f)
 		return (NULL);
-	if (f && lst)
+	new_list = f(list);
+	if (!new_list)
+		return (NULL);
+	iter = new_list;
+	list = list->next;
+	while (list)
 	{
-		name = f(lst);
-		name2 = name;
-		while (lst->next)
+		if (!(iter->next = f(list)))
 		{
-			lst = lst->next;
-			if (!(name->next = f(lst)))
-			{
-				ft_free(name2, name);
-				return (0);
-			}
-			name = name->next;
+			ft_lstremove(&new_list);
+			return (NULL);
 		}
-		name = f(lst);
-		return (name2);
+		iter = iter->next;
+		list = list->next;
 	}
-	return (0);
+	return (new_list);
 }

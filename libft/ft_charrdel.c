@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_charrdel.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymanilow <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dbendu <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/18 14:30:30 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/04/27 11:54:14 by ymanilow         ###   ########.fr       */
+/*   Created: 2019/04/16 16:37:30 by dbendu            #+#    #+#             */
+/*   Updated: 2019/04/16 16:39:56 by dbendu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list **alst, void (*del)(void*, size_t))
+void	ft_charrdel(char ***arr)
 {
-	t_list *name;
+	size_t iter;
 
-	if (!alst)
+	if (!arr || !*arr)
 		return ;
-	if (del && *alst)
+	iter = 0;
+	while ((*arr)[iter])
 	{
-		name = *alst;
-		del(name->content, name->content_size);
-		free(*alst);
-		*alst = NULL;
+		free((*arr)[iter]);
+		(*arr)[iter] = NULL;
+		++iter;
 	}
+	free(*arr);
+	*arr = NULL;
 }

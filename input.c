@@ -3,74 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymanilow <ymanilow@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbendu <dbendu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 17:03:35 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/07/17 17:04:01 by ymanilow         ###   ########.fr       */
+/*   Updated: 2019/07/19 15:46:27 by dbendu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "unistd.h"
+
 #include "fillit.h"
 
-void		ft_point_move(t_shape *shape)
+void		ft_shape_move(t_shape *shape)
 {
-	size_t		i;
-	size_t		j;
+	unsigned x;
+	unsigned y;
 
-	i = 0;
-	j = 0;
-	i = shape->points[0].x;
-	while (j < 4)
-	{
-		shape->points[j].x -= i;
-		j++;
-	}
-	i = 0;
-	j = shape->points[0].y;
-	if (j > shape->points[1].y)
-		j = shape->points[1].y;
-	if (j > shape->points[2].y)
-		j = shape->points[2].y;
-	while (i < 4)
-	{
-		shape->points[i].y -= j;
-		i++;
-	}
+	x = shape->points[0].x;
+	y = 0 - 1;
+	while (++y < 4)
+		shape->points[y].x -= x;
+	y = shape->points[0].y;
+	if (y > shape->points[1].y)
+		y = shape->points[1].y;
+	if (y > shape->points[2].y)
+		y = shape->points[2].y;
+	x = 0 - 1;
+	while (++x < 4)
+		shape->points[x].y -= y;
 }
 
 void		ft_point_struct(char *s, t_shape *shape)
 {
-	size_t		i;
-	size_t		j;
+	unsigned i;
+	unsigned j;
 
-	i = 0;
+	i = 0 - 1;
 	j = 0;
-	while (i < 20)
-	{
+	while (++i < 20)
 		if (s[i] == '#')
 		{
 			shape->points[j].x = i / 5;
 			shape->points[j].y = i % 5;
 			j++;
 		}
-		i++;
-	}
 }
 
-int			ft_check_symbols(char *s, size_t rd)
+void		ft_check_symbols(char *s, size_t rd)
 {
-	size_t	i;
-	size_t	j;
-	size_t	k;
+	unsigned	i;
+	unsigned	j;
+	size_t		k;
 
-	i = 0;
+	i = 0 - 1;
 	j = 0;
 	k = 0;
-	while (i < 20)
+	while (++i < 20)
 	{
 		if (!((i + 1) % 5) && s[i] != '\n')
-			return (0);
-		if (s[i] == '#')
+			error();
+		else if (s[i] != '#' && s[i] != '.' && s[i] != '\n')
+		{
+			printf("symbol: %i\n", s[i]);
+			error();
+		}
+		else if (s[i] == '#')
 		{
 			k += ((i > 4) && (s[i - 5] == '#'));
 			k += ((i % 5) && (s[i - 1] == '#'));
@@ -78,39 +75,31 @@ int			ft_check_symbols(char *s, size_t rd)
 			k += (s[i + 1] == '#');
 			j++;
 		}
-		i++;
 	}
-	if (k != 6 && k != 8)
-		return (0);
-	if (j != 4)
-		return (0);
-	if (rd == 21 && s[20] != '\n')
-		return (0);
-	return (1);
+	if (k < 6 || j != 4 || (rd == 21 && s[20] != '\n'))
+		error();
 }
 
-int			ft_input(int fd, t_shape **shapes)
+void		ft_input(int fd, t_shape **shapes)
 {
-	size_t		rd;
-	size_t		check;
-	t_shape		shape;
-	char		s[21];
+	size_t	rd;
+	size_t	check;
+	t_shape	shape;
+	char	s[21];
 
 	while ((rd = read(fd, s, 21)))
 	{
 		if (rd != 20 && rd != 21)
-			return (0);
-		check = ft_check_symbols(s, rd);
-		if (check == 0)
-			return (0);
+			error();
+		ft_check_symbols(s, rd);
 		ft_point_struct(s, &shape);
-		ft_point_move(&shape);
-		ft_list_add_to_end(shapes, ft_list_new(shape));
+		ft_shape_move(&shape);
+		ft_shape_append(shapes, ft_shape_new(&shape));
 		check = rd;
 	}
 	if (check == 21)
-		return (0);
-	else if (check != 0)
-		return(1);
-	return (0);
+		error();
+	// else if (check != 0)
+	// 	return(1);
+	// return (0);
 }

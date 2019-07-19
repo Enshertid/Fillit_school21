@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_add_to_end.c                               :+:      :+:    :+:   */
+/*   ft_cswap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymanilow <ymanilow@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbendu <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/14 19:17:37 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/07/14 20:37:35 by ymanilow         ###   ########.fr       */
+/*   Created: 2019/04/08 20:12:44 by dbendu            #+#    #+#             */
+/*   Updated: 2019/04/08 20:12:47 by dbendu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-void		ft_list_add_to_end(t_shape **list, t_shape *new)
+void	ft_cswap(char *a, char *b)
 {
-	t_shape *it;
+	char temp;
 
-	if (list && *list && new)
+	if (a && b)
 	{
-		it = *list;
-		while (it->next)
-			it = it->next;
-		it->next = new;
-		new->next = NULL;
+		temp = *a;
+		*a = *b;
+		*b = temp;
 	}
-	else if (new)
-		*list = new;
 }

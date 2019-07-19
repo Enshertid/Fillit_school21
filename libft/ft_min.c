@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_add_end.c                                  :+:      :+:    :+:   */
+/*   ft_min.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymanilow <ymanilow@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbendu <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/13 17:40:36 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/07/14 19:21:57 by ymanilow         ###   ########.fr       */
+/*   Created: 2019/04/08 20:17:49 by dbendu            #+#    #+#             */
+/*   Updated: 2019/04/08 20:17:50 by dbendu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		ft_list_add_end(t_list **list, t_list *new)
+int	ft_min(int a, int b)
 {
-	t_list *it;
-
-	if (list && *list && new)
-	{
-		it = *list;
-		while (it->next)
-			it = it->next;
-		it->next = new;
-		new->next = NULL;
-	}
-	else if (new)
-		*list = new;
+	return (a < b ? a : b);
 }
