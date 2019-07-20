@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanilow <ymanilow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 17:03:12 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/07/20 09:55:40 by user             ###   ########.fr       */
+/*   Updated: 2019/07/18 12:55:15 by ymanilow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,12 @@ int		ft_check_figure(char	**map, t_shape *shapes , size_t x, size_t y, size_t ma
 		return (0);
 }
 
-char		**ft_place_figure(char **map, t_shape *shapes, size_t x, size_t y)
+char		**ft_place_figure(char **map, t_shape *shapes, size_t x, size_t y, size_t f)
 {
-	map[shapes->points[0].x + x][shapes->points[0].y + y] = shapes->letter;
-	map[shapes->points[1].x + x][shapes->points[1].y + y] = shapes->letter;
-	map[shapes->points[2].x + x][shapes->points[2].y + y] = shapes->letter;
-	map[shapes->points[3].x + x][shapes->points[3].y + y] = shapes->letter;
+	map[shapes->points[0].x + x][shapes->points[0].y + y] = 'A' + f;
+	map[shapes->points[1].x + x][shapes->points[1].y + y] = 'A' + f;
+	map[shapes->points[2].x + x][shapes->points[2].y + y] = 'A' + f;
+	map[shapes->points[3].x + x][shapes->points[3].y + y] = 'A' + f;
 	return (map);
 }
 
@@ -92,7 +92,7 @@ char		**ft_clean_map(char  **map, t_shape *shapes, size_t x, size_t y)
 	return (map);
 }
 
-int 		ft_fillit(char		***map, t_shape *shapes, size_t map_size)
+int 		ft_fillit(char		***map, t_shape *shapes, size_t map_size, size_t f)
 {
 	size_t		x;
 	size_t		y;
@@ -105,12 +105,14 @@ int 		ft_fillit(char		***map, t_shape *shapes, size_t map_size)
 		{
 			if (ft_check_figure(*map, shapes, x, y, map_size))
 			{
-				ft_place_figure(*map, shapes, x, y);
-				if (ft_fillit(map, shapes->next, map_size))
+				ft_place_figure(*map, shapes, x, y, f);
+				f++;
+				if (ft_fillit(map, shapes->next, map_size, f))
 					return (1);
 				else
 				{
 					ft_clean_map(*map, shapes, x, y);
+					f--;
 				}
 			}
 			y++;
@@ -123,32 +125,12 @@ int 		ft_fillit(char		***map, t_shape *shapes, size_t map_size)
 	return(1);
 }
 
-size_t	ft_shape_size(const t_shape *list)
+int			ft_do_fillit(char **map, t_shape *shapes, size_t map_size)
 {
-	size_t size;
+	size_t		i;
 
-	size = 0;
-	while (list)
-	{
-		++size;
-		list = list->next;
-	}
-	return (size);
-}
-
-
-char**			ft_do_fillit(t_shape *shapes)
-{
-	size_t map_size;
-	size_t points;
-	char **map;
-
-	map_size = 1;
-	points = ft_shape_size(shapes);
-	while (map_size * map_size < points)
-		++map_size;
-	map = ft_map_create(map_size);
-	while (!(ft_fillit(&map, shapes, map_size)))
+	i = 0;
+	while (!(ft_fillit(&map, shapes, map_size, i)))
 	{
 		ft_map_delete(map);
 		map = ft_map_create(++map_size);
@@ -156,5 +138,83 @@ char**			ft_do_fillit(t_shape *shapes)
 	size_t j = 0;
 	while(map[j])
 		printf("%s",map[j++]);
-	return (map);
+	return (1);
 }
+
+int			main(int ac, char **av)
+{
+	size_t				fd;
+	size_t				k;
+	char				**map;
+	t_shape				*shapes;
+	t_shape				*new;
+
+	k = ac;
+	fd = open(av[1], O_RDONLY);
+	if (ft_input(fd, &shapes) == 0)
+	{
+		printf("error");
+		return (0);
+	}
+	new = shapes;
+	k = 0;
+	while(new)
+	{
+		new = new->next;
+		k++;
+	}
+	if (k <= 2)
+		k = 2;
+	else if (k <= 3)
+		k = 3;
+	else if (k <= 4)
+		k = 4;
+	else if (k <= 6)
+		k = 5;
+	else if (k <= 9)
+		k = 6;
+	else if (k <= 12)
+		k = 7;
+	else if (k <= 16)
+		k = 8;
+	map = ft_map_create(k);
+	ft_do_fillit(map, shapes, k);
+	return (0);
+}
+//DO USAGE!!!!!!!!!!!!!!!!!
+
+// int			main()
+// {
+// 	size_t				fd;
+// 	size_t				k;
+// 	char				**map;
+// 	t_shape				*shapes;
+// 	t_shape				*new;
+
+// 	fd = open("/Users/ymanilow/Curcus42/fillit/valid_7", O_RDONLY);
+// 	if (ft_input(fd, &shapes) == 0)
+// 	{
+// 		printf("error");
+// 		return (0);
+// 	}
+// 	new = shapes;
+// 	k = 0;
+// 	while(new)
+// 	{
+// 		new = new->next;
+// 		k++;
+// 	}
+// 	if (k <= 4)
+// 		k = 4;
+// 	else if (k <= 6)
+// 		k = 5;
+// 	else if (k <= 9)
+// 		k = 6;
+// 	else if (k <= 12)
+// 		k = 7;
+// 	else if (k <= 16)
+// 		k = 8;
+// 	map = ft_map_create(k);
+// 	ft_do_fillit(map, shapes, k);
+// 	return (0);
+// }

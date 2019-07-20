@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_new.c                                      :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymanilow <ymanilow@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymanilow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/14 19:17:41 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/07/14 20:37:57 by ymanilow         ###   ########.fr       */
+/*   Created: 2019/04/14 13:11:50 by ymanilow          #+#    #+#             */
+/*   Updated: 2019/05/09 17:53:30 by ymanilow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-t_shape		*ft_list_new(t_shape shapes)
+char	*ft_strnew(size_t size)
 {
-	t_shape		*new;
+	char	*str;
 
-	if (!(new = malloc(sizeof(t_shape))))
+	if (size == (size_t)-1)
 		return (NULL);
-	ft_memcpy(new->points, shapes.points, sizeof(t_point) * 4);
-	new->next = NULL;
-	return (new);
+	if (!(str = (char *)malloc(sizeof(*str) * (size + 1))))
+		return (NULL);
+	ft_bzero(str, size + 1);
+	return (str);
 }

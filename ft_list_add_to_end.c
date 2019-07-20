@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_list_add_to_end.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanilow <ymanilow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 19:17:37 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/07/20 09:53:49 by user             ###   ########.fr       */
+/*   Updated: 2019/07/14 20:37:35 by ymanilow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,8 @@ void		ft_list_add_to_end(t_shape **list, t_shape *new)
 		while (it->next)
 			it = it->next;
 		it->next = new;
-		new->letter = it->letter + 1;
 		new->next = NULL;
 	}
 	else if (new)
-	{
-		new->letter = 'A';
 		*list = new;
-	}
 }

@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_new.c                                      :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymanilow <ymanilow@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymanilow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/14 19:17:41 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/07/14 20:37:57 by ymanilow         ###   ########.fr       */
+/*   Created: 2019/04/13 15:32:49 by ymanilow          #+#    #+#             */
+/*   Updated: 2019/04/19 15:11:39 by ymanilow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-t_shape		*ft_list_new(t_shape shapes)
+int		ft_isprint(int c)
 {
-	t_shape		*new;
-
-	if (!(new = malloc(sizeof(t_shape))))
-		return (NULL);
-	ft_memcpy(new->points, shapes.points, sizeof(t_point) * 4);
-	new->next = NULL;
-	return (new);
+	if (c >= '\040' && c <= '\176')
+		return (1);
+	else
+		return (0);
 }
