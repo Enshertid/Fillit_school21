@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_add_to_end.c                               :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/14 19:17:37 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/07/20 09:53:49 by user             ###   ########.fr       */
+/*   Created: 2019/07/20 09:44:09 by user              #+#    #+#             */
+/*   Updated: 2019/07/20 09:55:10 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void		ft_list_add_to_end(t_shape **list, t_shape *new)
+void error(void)
 {
-	t_shape *it;
+	write(1, "error\n", 6);
+	exit(0);
+}
 
-	if (list && *list && new)
+
+int			main(int argc, const char * const *argv)
+{
+	int		fd;
+	char	**map;
+	t_shape	*shapes;
+
+	if (argc != 2)
 	{
-		it = *list;
-		while (it->next)
-			it = it->next;
-		it->next = new;
-		new->letter = it->letter + 1;
-		new->next = NULL;
+		write(1, "One file must been in arguments.\n", 34);
+		write(1, "Example: ./fillit file_name\n", 29);
+		return (0);
 	}
-	else if (new)
-	{
-		new->letter = 'A';
-		*list = new;
-	}
+	if ((fd = open(argv[1], O_RDONLY)) == -1)
+		error();
+	shapes = NULL;
+	ft_input(fd, &shapes);
+	map = ft_do_fillit(shapes);
+	return (0);
 }
