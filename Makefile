@@ -3,37 +3,39 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ymanilow <ymanilow@student.42.fr>          +#+  +:+       +#+         #
+#    By: ymanilow <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/14 19:26:20 by ymanilow          #+#    #+#              #
-#    Updated: 2019/07/19 16:55:43 by ymanilow         ###   ########.fr        #
+#    Updated: 2019/07/17 11:41:28 by ymanilow         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fillit
 
-SRCS_C =	fillit.c			\
-			input.c				\
-			shape_operations.c	\
-			map_operations.c	\
-			main.c
+SRCS =	fillit.c				\
+		ft_list_add_to_end.c	\
+		ft_list_new.c			\
+		input.c					\
+		includes/libft/libft.a
 
-LIB = -C libft
-
-C_LIB = libft/libft.a
+INCLUDES =	-Iincludes					\
+			-Iincludes/libft/includes
 
 all: $(NAME)
 
 $(NAME):
-	@make $(LIB)
-	@gcc -Wall -Wextra -Werror -o fillit $(SRCS_C) -Iincludes -Ilibft/includes $(C_LIB)
+	@clear
+	@make -C includes/libft
+	@gcc -Wall -Wextra -Werror $(SRCS) $(INCLUDES) -o fillit
 
 clean:
+	@make clean -C includes/libft
 	@rm -Rf *.o
-	@make clean -C libft
 
 fclean: clean
-	@rm -f $(NAME)
-	@make f -C libft
+	@make fclean -C includes/libft
+	@rm $(NAME)
+
+f: fclean
 
 re: fclean all
