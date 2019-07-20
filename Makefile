@@ -6,7 +6,7 @@
 #    By: dbendu <dbendu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/14 19:26:20 by ymanilow          #+#    #+#              #
-#    Updated: 2019/07/20 14:09:44 by dbendu           ###   ########.fr        #
+#    Updated: 2019/07/20 17:56:33 by dbendu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,17 +14,17 @@
 NAME = fillit
 
 SRCS =	fillit.c				\
-		ft_list_add_to_end.c	\
-		ft_list_new.c			\
-		input.c
+		input.c					\
+		shape_actions.c			\
+		main.c
 
 HEADERS =	-Iincludes			\
 			-Ilibft/includes
 
 OBJS =	fillit.o				\
-		ft_list_add_to_end.o	\
-		ft_list_new.o			\
 		input.o					\
+		main.o					\
+		shape_actions.o			\
 		libft/libft.a
 
 
@@ -51,4 +51,12 @@ fclean: clean
 re: fclean all
 
 
+
+
 f: fclean
+
+c: all
+	time ./fillit file.txt
+
+g:
+	@gcc -g -Wall -Werror -Wextra $(SRCS) $(HEADERS) libft/libft.a
