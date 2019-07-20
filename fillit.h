@@ -6,7 +6,7 @@
 /*   By: dbendu <dbendu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 16:28:29 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/07/20 18:06:12 by dbendu           ###   ########.fr       */
+/*   Updated: 2019/07/20 18:35:14 by dbendu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ size_t					ft_input(int fd, t_shape **shapes);
 char					**ft_map_create(size_t k);
 int						ft_fillit(char ***map, t_shape *shapes,
 											size_t map_size);
-t_shape					*ft_list_new(t_shape shapes);
+t_shape					*ft_list_new(t_shape *shapes);
 int						ft_list_add_to_end(t_shape **list, t_shape *new);
 void					ft_shapes_clear(t_shape *shapes);
 

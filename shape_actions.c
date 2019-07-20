@@ -6,19 +6,19 @@
 /*   By: dbendu <dbendu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 17:27:59 by dbendu            #+#    #+#             */
-/*   Updated: 2019/07/20 18:04:46 by dbendu           ###   ########.fr       */
+/*   Updated: 2019/07/20 18:35:08 by dbendu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-t_shape		*ft_list_new(t_shape shapes)
+t_shape		*ft_list_new(t_shape *shapes)
 {
 	t_shape *new;
 
 	if (!(new = malloc(sizeof(t_shape))))
 		return (NULL);
-	ft_memcpy(new->points, shapes.points, sizeof(t_point) * 4);
+	ft_memcpy(new->points, shapes->points, sizeof(t_point) * 4);
 	new->next = NULL;
 	return (new);
 }

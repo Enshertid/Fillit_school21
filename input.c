@@ -6,7 +6,7 @@
 /*   By: dbendu <dbendu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 17:03:35 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/07/20 18:02:49 by dbendu           ###   ########.fr       */
+/*   Updated: 2019/07/20 18:35:22 by dbendu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ size_t			ft_input(int fd, t_shape **shapes)
 			return (0);
 		ft_point_struct(s, &shape);
 		ft_point_move(&shape);
-		ft_list_add_to_end(shapes, ft_list_new(shape));
+		ft_list_add_to_end(shapes, ft_list_new(&shape));
 		check = rd;
 	}
 	if (check != 20)
