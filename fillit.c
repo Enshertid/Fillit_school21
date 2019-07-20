@@ -6,7 +6,7 @@
 /*   By: dbendu <dbendu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 17:03:12 by ymanilow          #+#    #+#             */
-/*   Updated: 2019/07/20 18:17:54 by dbendu           ###   ########.fr       */
+/*   Updated: 2019/07/20 19:11:27 by dbendu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ int					ft_fillit(char ***map, t_shape *shapes, size_t map_size)
 				if (ft_fillit(map, shapes->next, map_size))
 					return (1);
 				ft_clean_map(*map, shapes, x, y);
+				if (shapes->next &&
+					!ft_memcmp(shapes, shapes->next, sizeof(t_point) * 4))
+					return (0);
 			}
 		}
 	}
