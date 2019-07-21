@@ -6,7 +6,7 @@
 /*   By: dbendu <dbendu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 14:16:08 by dbendu            #+#    #+#             */
-/*   Updated: 2019/07/20 18:29:50 by dbendu           ###   ########.fr       */
+/*   Updated: 2019/07/21 13:44:26 by dbendu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,64 @@ char		**ft_map_create(size_t map_size)
 	map[map_size] = NULL;
 	return (map);
 }
+
+/*
+** void print_map(char **map, size_t map_size)
+** {
+** 	size_t x;
+** 	size_t y;
+**	const char colors[13][12] = {
+** 	"\e[38;5;001m",
+** 	"\e[38;5;002m",
+** 	"\e[38;5;003m",
+** 	"\e[38;5;004m",
+** 	"\e[38;5;005m",
+** 	"\e[38;5;006m",
+** 	"\e[38;5;011m",
+** 	"\e[38;5;013m",
+** 	"\e[38;5;014m",
+** 	"\e[38;5;042m",
+** 	"\e[38;5;046m",
+** 	"\e[38;5;082m",
+** 	"\e[38;5;225m"
+** };
+**
+** 	x = 0 - 1;
+** 	while (++x < map_size)
+** 	{
+** 		y = 0 - 1;
+** 		while (++y < map_size)
+** 		{
+** 			if (map[x][y] == '.')
+** 			{
+** 				write(1, ".", 1);
+** 				continue;
+** 			}
+** 			write(1, colors[(map[x][y] - 'A') % 13], 11);
+** 			write(1, &(map[x][y]), 1);
+** 			write(1, "\e[0m", 4);
+** 		}
+** 		write(1, "\n", 1);
+** 	}
+** }
+**
+** void		ft_do_fillit(t_shape *shapes, size_t points)
+** {
+** 	size_t	map_size;
+** 	char	**map;
+**
+** 	map_size = 1;
+** 	while (map_size * map_size < points)
+** 		++map_size;
+** 	map = ft_map_create(map_size);
+** 	while (!(ft_fillit(&map, shapes, map_size)))
+** 	{
+** 		ft_map_delete(map);
+** 		map = ft_map_create(++map_size);
+** 	}
+** 	print_map(map, map_size);
+** }
+*/
 
 void		ft_do_fillit(t_shape *shapes, size_t points)
 {
